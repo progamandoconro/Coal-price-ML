@@ -1,0 +1,96 @@
+---
+title: "Análisis exploratorio de registros transaccionales de Termopaipa (Resultados preliminares)"
+author: "Oscar Gonzalez Valencia"
+date: "6/22/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Métodos
+
+Múltiples sesiones de programación en R y Python fueron creadas con "Ananconda". Se utilizaron diversos paquetes, enfocados a la ciencia de datos, cómo "ggplot2", "caret", "Keras" y "TensorFlow".
+
+# Descripción general de los datos transaccionales
+
+```{r echo=T}
+ df = read.csv("FD-04_minero_21062019.csv")
+ summary(df)
+```
+
+## Estructura de los datos
+
+```{r echo=T}
+str (df)
+```
+
+# Gráficas de variables de interés en el tiempo
+
+```{r echo=T}
+library(ggplot2)
+
+g <- ggplot (data = df,aes(x=1:nrow(df),y=df$DLI_VALOR_TOTAL))
+g + geom_point(cex=0.005) + geom_smooth()+ xlab ( "Número de la transacción (desde nov. 2008  a jun. 2019)") + ylab ("Valor Total ($ COL)")
+```
+
+```{r echo=T}
+g <- ggplot (data = df,aes(x=1:nrow(df),y=df$DLI_PRECIO_BASE))
+g + geom_point(cex=0.005) + geom_smooth()+ xlab ( "Número de la transacción (desde nov. 2008  a jun. 2019)") + ylab ("Precio base ($ COL)")
+```
+
+```{r echo=T}
+g <- ggplot (data = df,aes(x=1:nrow(df),y=df$DLI_KILOCALORIAS))
+g + geom_point(cex=0.005) + geom_smooth()+ xlab ( "Número de la transacción (desde nov. 2008  a jun. 2019)") + ylab ("DLI_Kilocalorías(kcal)")
+```
+
+```{r echo=T}
+g <- ggplot (data = df,aes(x=1:nrow(df),y=df$DLI_REGALIAS))
+g + geom_point(cex=0.005) + geom_smooth()+ xlab ( "Número de la transacción (desde nov. 2008  a jun. 2019)") + ylab ("Regalías ($ COL)")
+```
+
+```{r echo=T}
+g <- ggplot (data = df,aes(x=1:nrow(df),y=df$ENT_PESO_NETO))
+g + geom_point(cex=0.005) + geom_smooth()+ xlab ( "Número de la transacción (desde nov. 2008  a jun. 2019)") + ylab ("Peso neto (kg)")
+```
+
+```{r echo=T}
+g <- ggplot (data = df,aes(x=1:nrow(df),y=df$DLI_PESO_A_PAGAR))
+g + geom_point(cex=0.005) + geom_smooth()+ xlab ( "Número de la transacción (desde nov. 2008  a jun. 2019)") + ylab ("Peso a pagar (kg)")
+```
+
+```{r echo=T}
+
+cenizas <- replace( df$DLI_CENIZAS,df$DLI_CENIZAS > 40, 40)
+df_g <- data.frame(x=1:NROW(cenizas),cenizas=cenizas)
+
+g <- ggplot (data =df_g ,aes(df_g[,1],df_g[,2]))
+g + geom_point(cex=0.005) + geom_smooth()+ xlab ( "Número de la transacción (desde nov. 2008  a jun. 2019)") + ylab ("Cenizas (%)")
+```
+
+```{r echo=T}
+humedad <- replace(df$DLI_HUMEDAD, df$DLI_HUMEDAD > 20, 20)
+humedad <- data.frame(x=1:NROW(humedad),y=humedad)
+
+g <- ggplot (data = humedad,aes(humedad[,1],humedad[,2]))
+g + geom_point(cex=0.005) + geom_smooth()+ xlab ( "Número de la transacción (desde nov. 2008  a jun. 2019)") + ylab ("Humedad (%)")
+```
+
+```{r echo=T}
+
+cenizas_humedad <- replace( df$DLI_CENIZASMASHUMEDAD,df$DLI_CENIZASMASHUMEDAD > 50, 50)
+df_g <- data.frame(x=1:NROW(cenizas_humedad),cenizas=cenizas_humedad)
+
+g <- ggplot (data =df_g ,aes(df_g[,1],df_g[,2]))
+g + geom_point(cex=0.005) + geom_smooth()+ xlab ( "Número de la transacción (desde nov. 2008  a jun. 2019)") + ylab ("Cenizas y humedad (%)")
+```
+
+
+
+
+
+
+
+
+
