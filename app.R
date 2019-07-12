@@ -11,15 +11,9 @@ d <- read.csv('data_unsupervised.csv')
 d$Lider.Generacion_num <- ifelse(d$Lider.Generacion=="ARC",1,ifelse(d$Lider.Generacion=="GAP",2,3))
 d$Interventoria_num <- ifelse(d$Interventoria=="COLSERING",1,2)
 d$Valor=as.numeric(ifelse(d$DLI_VALOR_TOTAL.x<1000000,1000000, d$DLI_VALOR_TOTAL.x))
-
 d_num <- d[,c(-12,-17:-18)]
 
-
 ui <- 
- 
-  
-  
-
   fluidPage(
     setBackgroundColor(color = "WhiteSmoke  ", gradient = c("linear",
                                                           "radial"), direction = c("bottom", "top", "right", "left")),
@@ -67,11 +61,8 @@ ui <-
   
   )
     
-
 server <- function(input, output) {
-  
- 
-  
+
   output$plot1<-    renderText({
     
     set.seed(7)
@@ -82,7 +73,6 @@ server <- function(input, output) {
 paste("Datos agrupados:",round( (k$betweenss/k$totss)*100,2), "%")
    
    })
-  
   
   output$plot2<-    renderText({
     
@@ -121,12 +111,7 @@ paste("Datos agrupados:",round( (k$betweenss/k$totss)*100,2), "%")
      scale_color_gradient(low = "red", high = "green")+
      scale_shape_manual(values=1:11)
    
- 
-    
-   
    })
-  
- 
   
   output$plot4<-    renderPlotly({
    
@@ -134,9 +119,7 @@ paste("Datos agrupados:",round( (k$betweenss/k$totss)*100,2), "%")
       set.seed(7)
       
       d_tsne_1 <- princomp(d_num[,c(1:15,20)], cor = T)
-      
-     
-     
+   
       set.seed(7)
       
       p <- plot_ly(as.data.frame(d_tsne_1$scores), x = ~d_tsne_1$scores[,1], 
@@ -151,8 +134,7 @@ paste("Datos agrupados:",round( (k$betweenss/k$totss)*100,2), "%")
                             zaxis = list(title = 'Comp. 3 (13 %)')))%>%
                       layout(autosize = T,margin = list(l = 50, r = 50, b = 50, t = 50, pad = 4))
       p
-    
-          
+        
   })
  
 }
