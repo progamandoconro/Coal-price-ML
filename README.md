@@ -1,4 +1,4 @@
-# Unsupervised Machine Learning Analisis. 
+# Unsupervised Machine Learning Analysis for coal price.
 
 <div style="text-align:center"><img src="https://programandoconro.files.wordpress.com/2019/07/cropped-net-2.png?w=300" /></div>
 
