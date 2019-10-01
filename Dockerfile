@@ -4,6 +4,7 @@ RUN echo "install.packages(c('dplyr','zoo','Rtsne','plotly','ggplot2','shiny','s
 packages_R.R && Rscript packages_R.R
 WORKDIR /termoelectric
 RUN Rscript app.R
+VOLUME /home/ro/termoelectric
 
 #docker build . -t app
 #docker run --rm -p 8787:8787 -e PASSWORD=yourpasswordhere app
