@@ -6,7 +6,7 @@ library(shiny)#app
 library(shinyWidgets)#app
 library(Rtsne)#Reducción de la dimensionialidad con algoritmo ML
 
-d <- read.csv('data_unsupervised.csv')
+d <- read.csv('/termoelectric/data_unsupervised.csv')
 
 
 d$Lider.Generacion_num <- ifelse(d$Lider.Generacion=="ARC",1,ifelse(d$Lider.Generacion=="GAP",2,3))
