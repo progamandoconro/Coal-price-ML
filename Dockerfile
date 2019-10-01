@@ -12,6 +12,6 @@ RUN echo "install.packages(c('Rtsne'))" > packagesML.R && Rscript packagesML.R
 RUN echo "install.packages(c('plotly','ggplot2'))" > packagesDL.R && Rscript packagesDL.R
 RUN echo "install.packages(c('shiny','shinydashboard','shinyWidgets'))" > packages_compl.R && Rscript packages_compl.R
 
-RUN Rscript app.R
+RUN Rscript /termoelectric/app.R
 
 
