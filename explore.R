@@ -6,27 +6,20 @@
 # Objetivo: Predecir la venta a mediano plazo para afinar el funcionamiento de la planta y mejorar las ventas. 
 # Entrada y salida del material en
 #22-06-2019
-
-
+# Análisis por: Rodrigo Diaz-Lupanow
 
   # Análisis general
-
-setwd("~/Dropbox/DataScience/cliente_0001")
   
   df = read.csv("FD-04_minero_21062019.csv")
-  
   summary(df)
-
   str (df)
-  
   any(is.na(df))
-
   View(df)
-  
   any(is.na(df[,-6]))
 
   #Gráficas de variables en el tiempo utilizando ggplot2 (install.packages("ggplot2"))
- library(ggplot2)
+ 
+library(ggplot2)
  
 g <- ggplot (data = df,aes(x=1:nrow(df),y=df$DLI_VALOR_TOTAL))
 g + geom_point(cex=0.005) + geom_smooth()+ xlab ( "Registros desde 2008 al 2019") + ylab ("Valor Total ($ COL)")
@@ -49,9 +42,6 @@ g + geom_point(cex=0.005) + geom_smooth()+ xlab ( "Registros desde 2008 al 2019"
 g <- ggplot (data = df,aes(x=1:nrow(df),y=df$DLI_HUMEDAD))
 g + geom_point(cex=0.005) + geom_smooth()+ xlab ( "Registros desde 2008 al 2019") + ylab ("Humedad (%)")
 
-
-    
-
 #quitar los valores de cenizas mayores a 100
 
 cenizas <- replace( df$DLI_CENIZAS,df$DLI_CENIZAS > 100, 100)
@@ -60,38 +50,8 @@ df_g <- data.frame(x=1:NROW(cenizas),cenizas=cenizas)
 g <- ggplot (data =df_g ,aes(df_g[,1],df_g[,2]))
 g + geom_point(cex=0.005) + geom_smooth()+ xlab ( "Registros desde 2008 al 2019") + ylab ("Cenizas (%)")
 
-
 cenizas_humedad <- replace( df$DLI_CENIZASMASHUMEDAD,df$DLI_CENIZASMASHUMEDAD > 100, 100)
 df_g <- data.frame(x=1:NROW(cenizas_humedad),cenizas=cenizas_humedad)
 
 g <- ggplot (data =df_g ,aes(df_g[,1],df_g[,2]))
 g + geom_point(cex=0.005) + geom_smooth()+ xlab ( "Registros desde 2008 al 2019") + ylab ("Cenizas y humedad (%)")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
